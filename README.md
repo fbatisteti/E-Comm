@@ -20,3 +20,4 @@ Você precisa alterar o arquivo "./server/credential_copy.js" com as suas creden
 Criação do projeto, front será em Flutter
 - **01-29-32:**
 Tela de login criada
+Criação da API e POST de User
