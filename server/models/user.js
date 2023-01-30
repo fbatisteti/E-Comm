@@ -22,12 +22,15 @@ const userSchema = mongoose.Schema({
     password: {
         required: true,
         type: String,
+/*      // Agora está validando no auth.js... estava vindo os valores em hash
         validate: {
             validator: (value) => {
-                return value.length >= 6;
+                console.log(value);
+                return value.length >= 10;
             },
             message: 'Passwords must be at least 6 characters long',
         },
+*/
     },
     address: {
         type: String,

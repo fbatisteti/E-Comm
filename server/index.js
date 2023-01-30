@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const DB = require('./credentials');
+const credentials = require('./credentials');
 
 const PORT = 3000;
 
@@ -11,7 +11,7 @@ app.use(express.json()); // as requests que chegam viram JSON antes de serem uti
 app.use(authRouter);
 
 mongoose
-    .connect(DB)
+    .connect(credentials.db)
     .then(() => {
         console.log('connected to DB');
     })

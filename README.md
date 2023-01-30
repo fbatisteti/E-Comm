@@ -12,12 +12,15 @@ npm run dev
 
 Dependências FRONT
 http
+provider
+shared_preferences
 
 Dependências BACK
 HTTP
 Express
 Mongoose
 Nodemon
+JSONWebToken
 
 Você precisa alterar o arquivo "./server/credential_copy.js" com as suas credenciais do MongoDB e remover o "_copy" do nome
 
