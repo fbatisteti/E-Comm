@@ -30,3 +30,5 @@ Criação do projeto, front será em Flutter
 - **01-29-32:**
 Tela de login criada
 Criação da API e POST de User
+- **01-30-29:**
+Login e autenticação
