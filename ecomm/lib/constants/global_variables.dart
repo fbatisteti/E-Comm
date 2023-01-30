@@ -1,4 +1,7 @@
+import "package:ecomm/constants/private_variables.dart";
 import "package:flutter/material.dart";
+
+String uri = 'http://$ip:3000';
 
 class GlobalVariables {
   // COLORS

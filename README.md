@@ -4,10 +4,16 @@
 
 Usando como base o seguinte tutorial: https://github.com/RivaanRanawat/flutter-amazon-clone-tutorial
 
+Para inicializar a aplicação (SEM CORS)
+flutter run -d chrome --web-browser-flag "--disable-web-security"
+
 Para inicializar a API
 npm run dev
 
-Dependências
+Dependências FRONT
+http
+
+Dependências BACK
 HTTP
 Express
 Mongoose

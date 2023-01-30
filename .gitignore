@@ -136,5 +136,8 @@ app.*.symbols
 # MongoDB credentials
 credentials.js
 
+# Personal IP address
+private_variables.dart
+
 # NODE Modules
 node_modules
