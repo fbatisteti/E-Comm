@@ -1,3 +1,4 @@
+import 'package:ecomm/common/widgets/bottom_bar.dart';
 import 'package:ecomm/constants/global_variables.dart';
 import 'package:ecomm/features/auth/screens/auth_screen.dart';
 import 'package:ecomm/features/auth/services/auth_service.dart';
@@ -52,8 +53,8 @@ class _MyAppState extends State<MyApp> {
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-        ? const HomeScreen()
-        : const AuthScreen(),
+        ? const BottomBar() // HomeScreen()
+        : const BottomBar() // AuthScreen(),
     );
   }
 }

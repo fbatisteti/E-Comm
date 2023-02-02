@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ecomm/common/widgets/bottom_bar.dart';
 import 'package:ecomm/constants/error_handling.dart';
 import 'package:ecomm/constants/global_variables.dart';
 import 'package:ecomm/constants/utils.dart';
@@ -85,7 +86,7 @@ class AuthService {
           // ignore: use_build_context_synchronously
           Navigator.pushNamedAndRemoveUntil(
             context,
-            HomeScreen.routeName,
+            BottomBar.routeName,
             (route) => false,
           );
         },
@@ -129,7 +130,7 @@ class AuthService {
         userProvider.setUser(userRes.body);
       }
     } catch (e) {
-      showSnackBar(context, e.toString());
+      //showSnackBar(context, e.toString());
     }
   }
 }

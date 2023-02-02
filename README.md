@@ -14,6 +14,7 @@ Dependências FRONT
 http
 provider
 shared_preferences
+badges
 
 Dependências BACK
 HTTP
@@ -27,8 +28,10 @@ Você precisa alterar o arquivo "./server/credential_copy.js" com as suas creden
 ## Log
 - **01-28-23:** 
 Criação do projeto, front será em Flutter
-- **01-29-32:**
+- **01-29-23:**
 Tela de login criada
 Criação da API e POST de User
-- **01-30-29:**
+- **01-30-23:**
 Login e autenticação
+- **02-02-23**
+Navegação pelo menu inferior
