@@ -35,3 +35,4 @@ Criação da API e POST de User
 Login e autenticação
 - **02-02-23**
 Navegação pelo menu inferior
+Tela de account e pedidos realizados
