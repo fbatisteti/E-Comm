@@ -2,37 +2,44 @@
 
 # E-Commerce Mock-up
 
-Usando como base o seguinte tutorial: https://github.com/RivaanRanawat/flutter-amazon-clone-tutorial
+Usando como base o seguinte tutorial: https://github.com/RivaanRanawat/flutter-amazon-clone-tutorial  
 
-Para inicializar a aplicação (SEM CORS)
+Para inicializar a aplicação (SEM CORS)  
+```
 flutter run -d chrome --web-browser-flag "--disable-web-security"
+```
 
-Para inicializar a API
+Para inicializar a API  
+```
 npm run dev
+```
 
-Dependências FRONT
-http
-provider
-shared_preferences
-badges
+**Dependências FRONT**:  
+http  
+provider  
+shared_preferences  
+badges  
+carousel_slider  
 
-Dependências BACK
-HTTP
-Express
-Mongoose
-Nodemon
-JSONWebToken
+**Dependências BACK**:
+HTTP  
+Express  
+Mongoose  
+Nodemon  
+JSONWebToken  
 
 Você precisa alterar o arquivo "./server/credential_copy.js" com as suas credenciais do MongoDB e remover o "_copy" do nome
 
 ## Log
-- **01-28-23:** 
-Criação do projeto, front será em Flutter
-- **01-29-23:**
-Tela de login criada
-Criação da API e POST de User
-- **01-30-23:**
-Login e autenticação
-- **02-02-23**
-Navegação pelo menu inferior
-Tela de account e pedidos realizados
+- **01-28-23**:
+Criação do projeto, front será em Flutter  
+- **01-29-23**:
+Tela de login criada  
+Criação da API e POST de User  
+- **01-30-23**:
+Login e autenticação  
+- **02-02-23**:
+Navegação pelo menu inferior  
+Tela de account e pedidos realizados  
+- **02-04-23**:
+Tela de home
