@@ -21,6 +21,8 @@ npm run dev
 - badges  
 - carousel_slider  
 - dotted_border  
+- file_picker  
+- cloudinary_public  
 
 **Dependências BACK**:
 - HTTP  
@@ -29,7 +31,12 @@ npm run dev
 - Nodemon  
 - JSONWebToken  
 
-Você precisa alterar o arquivo "./server/credential_copy.js" com as suas credenciais do MongoDB e remover o "_copy" do nome
+**Você precisa:**  
+- Alterar o arquivo "./ecomm/lib/constants/private_variables_copy.dart" com as suas credenciais (IP, Cloudinary...) e remover o "_copy" do nome  
+- Alterar o arquivo "./server/credential_copy.js" com as suas credenciais do MongoDB e remover o "_copy" do nome  
+
+## Erros conhecidos  
+Não é possível realizar o upload de uma imagem pela web quando subindo um novo produto. Isso porque não há "path" quando o assunto é web  
 
 ## Log
 - **01-28-23**:  
@@ -46,3 +53,4 @@ Tela de account e pedidos realizados
 Tela de home
 - **02-05-23**:  
 Início da tela de admin, tela de inclusão de produtos
+Inclusão de produtos
