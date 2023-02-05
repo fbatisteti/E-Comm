@@ -91,13 +91,10 @@ class _HomeScreenState extends State<HomeScreen> {
             TopCategories(),
             SizedBox(height: 10,),
             CarouselImage(),
-            DealOfTheDay()
+            DealOfTheDay(),
           ],
         ),
       ),
-//      Center(
-//        child: Text(user.toJson()),
-//      ),
     );
   }
 }

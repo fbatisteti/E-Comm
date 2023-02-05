@@ -40,6 +40,7 @@ dependencies:
   shared_preferences: ^2.0.17
   badges: ^3.0.2
   carousel_slider: ^4.2.1
+  dotted_border: ^2.0.0+3
 
 dev_dependencies:
   flutter_test:
