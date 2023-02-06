@@ -39,18 +39,21 @@ npm run dev
 Não é possível realizar o upload de uma imagem pela web quando subindo um novo produto. Isso porque não há "path" quando o assunto é web  
 
 ## Log
-- **01-28-23**:  
+- **28-01-23**:  
 Criação do projeto, front será em Flutter  
-- **01-29-23**:  
+- **29-01-23**:  
 Tela de login criada  
 Criação da API e POST de User  
-- **01-30-23**:  
+- **30-01-23**:  
 Login e autenticação  
 - **02-02-23**:  
 Navegação pelo menu inferior  
 Tela de account e pedidos realizados  
-- **02-04-23**:  
+- **04-02-23**:  
 Tela de home
-- **02-05-23**:  
+- **05-02-23**:  
 Início da tela de admin, tela de inclusão de produtos
 Inclusão de produtos
+- **06-02-23**:
+Tela de produtos apresentando produtos
+Remoção de produtos

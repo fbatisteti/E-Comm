@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cloudinary_public/cloudinary_public.dart';
@@ -63,6 +64,69 @@ class AdminServices {
         onSucces: () {
           showSnackBar(context, 'Product added succesfully');
           Navigator.pop(context);
+        });
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
+  Future<List<Product>> FetchAllProducts(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    List<Product> productList = [];
+
+    try {
+      http.Response res = await http.get(
+        Uri.parse('$uri/admin/get-products'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8', // porque está usando express
+          'x-auth-token': userProvider.user.token,
+        },
+      );
+
+      // ignore: use_build_context_synchronously
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSucces: () {
+          for(int i = 0; i<jsonDecode(res.body).length; i++) {
+            productList.add(
+              Product.fromJson(jsonEncode(jsonDecode(res.body)[i])) // transforma o índice i de JSON para um objeto, depois transforma em JSON, para criar um Product por meio dele
+            );
+          }
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+
+    return productList;
+  }
+
+  void DeleteProduct({
+    required BuildContext context,
+    required Product product,
+    required VoidCallback onSucces,
+  }) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    try {
+      http.Response res = await http.post(
+        Uri.parse('$uri/admin/delete-product'),
+        body: jsonEncode({
+          'id': product.id,
+        }),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8', // porque está usando express
+          'x-auth-token': userProvider.user.token,
+        },
+      );
+
+      // ignore: use_build_context_synchronously
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSucces: () {
+          onSucces();
         });
     } catch (e) {
       showSnackBar(context, e.toString());
