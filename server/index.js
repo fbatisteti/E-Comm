@@ -1,16 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const credentials = require('./credentials');
+const authRouter = require('./routes/auth');
 const adminRouter = require('./routes/admin');
+const productRouter = require('./routes/product');
 
 const PORT = 3000;
 
 const app = express();
 
-const authRouter = require('./routes/auth');
 app.use(express.json()); // as requests que chegam viram JSON antes de serem utilizadas
 app.use(authRouter);
 app.use(adminRouter);
+app.use(productRouter);
 
 mongoose
     .connect(credentials.db)

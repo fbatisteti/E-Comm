@@ -4,7 +4,6 @@ import 'package:ecomm/features/admin/screens/add_products_screen.dart';
 import 'package:ecomm/features/admin/services/admin_services.dart';
 import 'package:ecomm/models/product.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({ Key? key }) : super(key: key);
@@ -84,9 +83,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
           },
         ),
         floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
           onPressed: navigateToAddProduct,
           tooltip: 'Add a product',
+          child: const Icon(Icons.add),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       );
