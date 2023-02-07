@@ -27,10 +27,10 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
   }
 
   fetchCategoryProducts() async {
-    productList = await homeServices.fetchCategoryProducts(
-      context: context,
-      category: widget.category
-    );
+    (widget.category == '')
+    ? { productList = await homeServices.fetchNoCategoryProducts(context: context)  }
+    : { productList = await homeServices.fetchCategoryProducts(context: context, category: widget.category) };
+
     setState(() {});
   }
 
@@ -51,14 +51,16 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
         ),
       ),
 
-      body: productList == null
+      body: (productList == null)
       ? const Loader() // enquanto busca ou quando não tem nada
       : Column(
         children: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             alignment: Alignment.topLeft,
-            child: Text('Keep shopping for ${widget.category}', style: const TextStyle(fontSize: 20),),
+            child: (widget.category == "")
+            ? const Text('Browse all products', style: TextStyle(fontSize: 20),)
+            : Text('Keep shopping for ${widget.category}', style: const TextStyle(fontSize: 20),),
           ),
           SizedBox(
             height: 170,
@@ -83,7 +85,7 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(10),
-                          child: Image.network(product.images[0][index]),
+                          child: Image.network(product.images[0]),
                         ),
                       ),
                     ),

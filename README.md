@@ -63,3 +63,4 @@ Remoção de produtos
 - **07-02-23**:  
 Inserção de produtos de API externa
 Navegação pelos produtos por categoria ("filtro")
+Criação do filtro "todos"
