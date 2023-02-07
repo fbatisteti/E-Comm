@@ -68,7 +68,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   children: [
                     Expanded(
                       child: Text(
-                        ((MediaQuery.of(context).size.height)/300).floorToDouble().toString(), //productData.name,
+                        productData.name,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                       )

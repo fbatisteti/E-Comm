@@ -14,6 +14,32 @@ import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 class AdminServices {
+  void PopulateFromApi({required BuildContext context,}) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    try {
+      http.Response res = await http.get(
+        Uri.parse('$uri/admin/external-api'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8', // porque está usando express
+          'x-auth-token': userProvider.user.token,
+        },
+      );
+
+      // ignore: use_build_context_synchronously
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSucces: () {
+          showSnackBar(context, 'Populated from API');
+          Navigator.pop(context);
+        });
+      
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
   void SellProduct({
     required BuildContext context,
     required String name,

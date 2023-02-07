@@ -35,8 +35,9 @@ npm run dev
 - Alterar o arquivo "./ecomm/lib/constants/private_variables_copy.dart" com as suas credenciais (IP, Cloudinary...) e remover o "_copy" do nome  
 - Alterar o arquivo "./server/credential_copy.js" com as suas credenciais do MongoDB e remover o "_copy" do nome  
 
-## Erros conhecidos  
+## Erros conhecidos / Falta fazer  
 Não é possível realizar o upload de uma imagem pela web quando subindo um novo produto. Isso porque não há "path" quando o assunto é web  
+Falta aceitar mais de uma URL de API externa
 
 ## Log
 - **28-01-23**:  
@@ -52,8 +53,10 @@ Tela de account e pedidos realizados
 - **04-02-23**:  
 Tela de home
 - **05-02-23**:  
-Início da tela de admin, tela de inclusão de produtos
-Inclusão de produtos
-- **06-02-23**:
-Tela de produtos apresentando produtos
-Remoção de produtos
+Início da tela de admin, tela de inclusão de produtos  
+Inclusão de produtos  
+- **06-02-23**:  
+Tela de produtos apresentando produtos  
+Remoção de produtos  
+- **07-02-23**:  
+Inserção de produtos de API externa

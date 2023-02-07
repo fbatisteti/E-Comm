@@ -52,6 +52,10 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
     }
   }
 
+  void populateFromApi() {
+    adminServices.PopulateFromApi(context: context);
+  }
+
   void selectImages() async {
     var res = await pickImages();
     setState(() {
@@ -79,7 +83,17 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
               gradient: GlobalVariables.appBarGradient
             ),
           ),
-          title: const Text('Add Product', style: TextStyle(color: Colors.black),)
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text('Add Product', style: TextStyle(color: Colors.black),),
+              IconButton(
+                onPressed: populateFromApi,
+                icon: const Icon(Icons.api, size: 18,),
+                tooltip: "Populate from API",
+              ),
+            ],
+          ),
         ),
       ),
 

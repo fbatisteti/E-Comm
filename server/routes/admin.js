@@ -2,6 +2,7 @@ const express = require('express');
 const adminRouter = express.Router();
 const admin = require('../middlewares/admin');
 const Product = require("../models/product");
+const credentials = require("../credentials");
 
 // ADD PRODUCT
 adminRouter.post('/admin/add-product', admin, async (req, res) => {
@@ -39,6 +40,96 @@ adminRouter.get('/admin/get-products', admin, async (req, res) => {
             });
     }
 });
+
+// ADD FROM API
+function getCategoria(depto) {
+    switch(depto) {
+        case 'Tools':
+            return 'Appliances';
+        case 'Outdoors':
+            return 'Appliances';
+        case 'Games':
+            return 'Books';
+        case 'Books':
+            return 'Books';
+        case 'Computers':
+            return 'Books';
+        case 'Music':
+            return 'Appliances';
+        case 'Garden':
+            return 'Appliances';
+        case 'Health':
+            return 'Essentials';
+        case 'Clothing':
+            return 'Fashion';
+        case 'Shoes':
+            return 'Fashion';
+        case 'Grocery':
+            return 'Essentials';
+        case 'Jewelery':
+            return 'Fashion';
+        case 'Baby':
+            return 'Essentials';
+        case 'Kids':
+            return 'Essentials';
+        case 'Industrial':
+            return 'Appliances';
+        case 'Home':
+            return 'Appliances';
+        case 'Toys':
+            return 'Mobile';
+        case 'Movies':
+            return 'Mobile';
+        case 'Beauty':
+            return 'Fashion';
+        case 'Electronics':
+            return 'Mobile';
+        case 'Sports':
+            return 'Essentials';
+        case 'Vestuário':
+            return 'Fashion';
+        default:
+            return 'Tools';
+      }
+}
+
+adminRouter.get('/admin/external-api', admin, async (req, res) => {
+    var products;
+    try {
+        products = await fetch(
+            credentials.externalApi.br,
+            {
+                method: 'GET',
+                headers: {'Accept': 'application/json',},
+            })
+            .then((response) => response.json());
+    } catch (e) {
+        return res
+            .status(500) // Internal Server Error
+            .json({
+                error: e.message,
+            });
+    }
+
+    var convertedProducts = [];
+
+    products.forEach(product => {
+        convertedProducts.push(new Product({
+            name: product['nome'],
+            description: (product['descricao'] + ' / Material: ' + product['material'] + ' / Status: ' + product['categoria']),
+            images: product['imagem'],
+            quantity: Math.floor(Math.random() * 101), // random de 0 a 100
+            price: parseFloat(product['preco']),
+            category: getCategoria(product['departamento']) // conversões devidas
+        }));
+    });
+
+    convertedProducts.forEach(async product => {
+        product = await product.save();
+    });
+
+    res.json({msg: "Populated from API"});
+})
 
 // DELETE PRODUCT
 adminRouter.post('/admin/delete-product', admin, async (req, res) => {
