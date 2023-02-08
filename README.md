@@ -23,6 +23,7 @@ npm run dev
 - dotted_border  
 - file_picker  
 - cloudinary_public  
+- flutter_rating_bar  
 
 **Dependências BACK**:
 - HTTP  
@@ -61,6 +62,7 @@ Inclusão de produtos
 Tela de produtos apresentando produtos  
 Remoção de produtos  
 - **07-02-23**:  
-Inserção de produtos de API externa
+Inserção de produtos de API externa *
 Navegação pelos produtos por categoria ("filtro")
-Criação do filtro "todos"
+Criação do filtro "todos" *
+Detalhamento do produto
