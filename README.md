@@ -41,7 +41,8 @@ Não é possível realizar o upload de uma imagem pela web quando subindo um nov
 Falta aceitar mais de uma URL de API externa
 Falta auto-refresh quando adiciona novo produto
 Alterar para buscar "on demand" da API, ao invés de salvar em banco
-Busca não está scrollable na web  
+<del>Busca não está scrollable na web</del> [Corrigido em 07-02-23, alterado de visualização lista para grid se for web]  
+Melhorar barra de busca, não parece estar buscando corretamente  
 
 ## Log
 - **28-01-23**:  

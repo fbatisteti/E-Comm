@@ -6,6 +6,7 @@ import 'package:ecomm/features/search/services/search_services.dart';
 import 'package:ecomm/features/search/widgets/searched_product.dart';
 import 'package:ecomm/models/product.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class SearchScreen extends StatefulWidget {
   static const String routeName = '/search-screen';
@@ -115,7 +116,22 @@ class _SearchScreenState extends State<SearchScreen> {
           const AddressBox(),
           const SizedBox(height: 10,),
           Expanded(
-            child: ListView.builder(
+            child: (kIsWeb)
+            ? GridView.builder( // muda a visualização se for para web, de lista para grid
+                padding: const EdgeInsets.all(5),
+                itemCount: products!.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount( // TLDR: preenche o máximo que dá
+                  crossAxisCount: ((MediaQuery.of(context).size.width)/450).floor(), // 1 para cada 400 pixels
+                  childAspectRatio: 2.5,
+                ),
+                itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {Navigator.pushNamed(context, ProductDetailsScreen.routeName, arguments: products![index]);},
+                  child: SearchedProduct(product: products![index])
+                );
+              }
+              )
+            : ListView.builder(
               itemCount: products!.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
