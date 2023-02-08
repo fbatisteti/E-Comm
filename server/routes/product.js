@@ -40,4 +40,35 @@ productRouter.get('/api/products/search/:query', auth, async (req, res) => {
     }
 });
 
+// RATE PRODUCT
+productRouter.post('/api/rate-product', auth, async (req, res) => {
+    try {
+        const { id, rating } = req.body;
+        let product = await Product.findById(id);
+
+        for (let i = 0; i < product.ratings.length; i++) {
+            if (product.ratings[i].userId == req.user) { // pegando USER do middleware
+                product.ratings.splice(i, 1); // "pop" localizado
+                break;
+            }
+        };
+
+        const ratingSchema = {
+            userId: req.user,
+            rating,
+        };
+        
+        product.ratings.push(ratingSchema);
+        product = await product.save();
+
+        res.json(product);
+    } catch (e) {
+        return res
+            .status(500) // Internal Server Error
+            .json({
+                error: e.message,
+            });
+    }
+})
+
 module.exports = productRouter;

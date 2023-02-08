@@ -41,6 +41,7 @@ Não é possível realizar o upload de uma imagem pela web quando subindo um nov
 Falta aceitar mais de uma URL de API externa
 Falta auto-refresh quando adiciona novo produto
 Alterar para buscar "on demand" da API, ao invés de salvar em banco
+Busca não está scrollable na web  
 
 ## Log
 - **28-01-23**:  
@@ -62,7 +63,8 @@ Inclusão de produtos
 Tela de produtos apresentando produtos  
 Remoção de produtos  
 - **07-02-23**:  
-Inserção de produtos de API externa *
-Navegação pelos produtos por categoria ("filtro")
-Criação do filtro "todos" *
-Detalhamento do produto
+Inserção de produtos de API externa *  
+Navegação pelos produtos por categoria ("filtro")  
+Criação do filtro "todos" *  
+Detalhamento do produto  
+Avaliações (rating)  
