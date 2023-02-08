@@ -120,7 +120,11 @@ adminRouter.get('/admin/external-api', admin, async (req, res) => {
             images: product['imagem'],
             quantity: Math.floor(Math.random() * 101), // random de 0 a 100
             price: parseFloat(product['preco']),
-            category: getCategoria(product['departamento']) // conversões devidas
+            category: getCategoria(product['departamento']), // conversões devidas
+            ratings: [{
+                userId: 'x',
+                rating: (Math.floor(Math.random() * 49) + 1)/10,
+            }], // random de 1 a 5
         }));
     });
 
