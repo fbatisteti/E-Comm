@@ -28,6 +28,7 @@ Não foi feita a parte de pagamentos do iOS
 - flutter_rating_bar
 - pay
 - intl
+- charts_flutter_new
 
 **Dependências BACK**:
 - HTTP
@@ -86,4 +87,5 @@ Apple e Google Pay (não implementados)
 \* Método "genérico" de venda\
 Pedidos/venda\
 Lista/tela de pedidos realizados\
-Visualização de pedidos pelo admin
+Visualização de pedidos pelo admin\
+Estatísticas
