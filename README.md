@@ -84,5 +84,6 @@ Carrinho\
 Apple e Google Pay (não implementados)
 - **09-02-23**:\
 \* Método "genérico" de venda\
-Pedidos/venda
-Lista/tela de pedidos realizados
+Pedidos/venda\
+Lista/tela de pedidos realizados\
+Visualização de pedidos pelo admin

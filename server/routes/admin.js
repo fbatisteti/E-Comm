@@ -2,6 +2,7 @@ const express = require('express');
 const adminRouter = express.Router();
 const admin = require('../middlewares/admin');
 const {Product} = require("../models/product");
+const Order = require("../models/order");
 const credentials = require("../credentials");
 
 // ADD PRODUCT
@@ -149,5 +150,36 @@ adminRouter.post('/admin/delete-product', admin, async (req, res) => {
             });
     }
 })
+
+// GET ORDERS
+adminRouter.get('/admin/get-orders', admin, async (req, res) => {
+    try {
+        const orders = await Order.find({});
+        res.json(orders);
+    } catch (e) {
+        return res
+            .status(500) // Internal Server Error
+            .json({
+                error: e.message,
+            });
+    }
+});
+
+// MOVE ORDER FORWARD
+adminRouter.post('/admin/change-order-status', admin, async (req, res) => {
+    try {
+        const { id, status } = req.body;
+        let order = await Order.findById(id);
+        order.status = status;
+        order = await order.save();
+        res.json(order);
+    } catch (e) {
+        return res
+            .status(500) // Internal Server Error
+            .json({
+                error: e.message,
+            });
+    }
+});
 
 module.exports = adminRouter;

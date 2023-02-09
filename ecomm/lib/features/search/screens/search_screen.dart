@@ -121,7 +121,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 padding: const EdgeInsets.all(5),
                 itemCount: products!.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount( // TLDR: preenche o máximo que dá
-                  crossAxisCount: ((MediaQuery.of(context).size.width)/450).floor(), // 1 para cada 400 pixels
+                  crossAxisCount: ((MediaQuery.of(context).size.width)/450).floor(), // 1 para cada 450 pixels
                   childAspectRatio: 2.5,
                 ),
                 itemBuilder: (context, index) {

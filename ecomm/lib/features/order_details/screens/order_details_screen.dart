@@ -1,8 +1,12 @@
+import 'package:ecomm/common/widgets/custom_button.dart';
 import 'package:ecomm/constants/global_variables.dart';
+import 'package:ecomm/features/admin/services/admin_services.dart';
 import 'package:ecomm/features/search/screens/search_screen.dart';
 import 'package:ecomm/models/order.dart';
+import 'package:ecomm/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class OrderDetailsScreen extends StatefulWidget {
   static const String routeName = '/order-details';
@@ -18,9 +22,23 @@ class OrderDetailsScreen extends StatefulWidget {
 
 class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   int currentStep = 0;
+  final AdminServices adminServices = AdminServices();
 
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+  }
+
+  void changeOrderStatus() { // apenas admin
+    adminServices.changeOrderStatus(
+      context: context,
+      status: widget.order.status + 1,
+      order: widget.order,
+      onSucces: () {
+        setState(() {
+          currentStep += 1;
+        });
+      }
+    );
   }
 
   @override
@@ -31,6 +49,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context).user;
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -184,7 +204,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 decoration: BoxDecoration(border: Border.all(color: Colors.black12)),
                 child: Stepper(
                   controlsBuilder: ((context, details) {
-                    return const SizedBox(); // para não ter esse menu visível
+                    return (user.type == 'admin')
+                    ? CustomButton(text: 'Done', onTap: () => changeOrderStatus())
+                    : const SizedBox(); // para não ter esse menu visível
                   }),
                   currentStep: currentStep,
                   steps: [
