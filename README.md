@@ -50,6 +50,7 @@ Quando acessa como admin, tem que atualizar a página para ir para o menu de adm
 Falta colocar tooltip do valor da nota nas estrelas\
 Falta melhorar a escolha da oferta do dia (atualmente, pega a maior avalição)\
 Adicionar alternativa aos métodos de pagamento
+Avisar quando um produto é adicionado ao carrinho
 
 ## Log
 - **28-01-23**:\
@@ -80,3 +81,6 @@ Avaliações (rating)
 Oferta do dia\
 Carrinho\
 Apple e Google Pay (não implementados)
+- **09-02-23**:\
+Método "genérico" de venda\
+Pedidos

@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require("../models/user");
+const Order = require("../models/order");
 const auth = require('../middlewares/auth');
 const {Product} = require("../models/product");
 const userRouter = express.Router();
@@ -55,6 +56,69 @@ userRouter.delete('/api/remove-from-cart/:id', auth, async (req, res) => {
 
         user = await user.save();
         res.json(user);
+    } catch (e) {
+        return res
+            .status(500) // Internal Server Error
+            .json({
+                error: e.message,
+            });
+    }
+});
+
+userRouter.post('/api/save-user-address', auth, async (req, res) => {
+    try {
+        const {address} = req.body;
+        let user = await User.findById(id);
+
+        user.address = address;
+
+        user = await user.save();
+        res.json(user);
+    } catch (e) {
+        return res
+            .status(500) // Internal Server Error
+            .json({
+                error: e.message,
+            });
+    }
+});
+
+userRouter.post('/api/order', auth, async (req, res) => {
+    try {
+        const {cart, totalPrice, address} = req.body;
+        let products = [];
+
+        for (let i = 0; i < cart.length; i++) {
+            let product = await Product.findById(cart[i].product._id);
+            
+            if (product.quantity >= cart[i].quantity) { // tem em estoque
+                product.quantity -= cart[i].quantity;
+                products.push({product, quantity: cart[i].quantity});
+                await product.save();
+            } else {
+                return res
+                    .status(400)
+                    .json({
+                        msg: `${product.name} is out of stock`
+                    });
+            }
+        }
+
+        // zera o carrinho
+        let user = await User.findById(req.user);
+        user.cart = [];
+        user = await user.save();
+
+        let order = new Order({
+            products,
+            totalPrice,
+            address,
+            userId: req.user,
+            orderedAt: new Date().getTime(),
+        });
+        order = await order.save();
+
+        res.json(order);
     } catch (e) {
         return res
             .status(500) // Internal Server Error
