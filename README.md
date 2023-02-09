@@ -14,6 +14,8 @@ Para inicializar a API
 npm run dev
 ```
 
+Não foi feita a parte de pagamentos do iOS
+
 **Dependências FRONT**:
 - http
 - provider
@@ -24,6 +26,7 @@ npm run dev
 - file_picker
 - cloudinary_public
 - flutter_rating_bar
+- pay
 
 **Dependências BACK**:
 - HTTP
@@ -37,15 +40,16 @@ npm run dev
 - Alterar o arquivo "./server/credential_copy.js" com as suas credenciais do MongoDB e remover o "_copy" do nome
 
 ## Erros conhecidos / Falta fazer
-Não é possível realizar o upload de uma imagem pela web quando subindo um novo produto. Isso porque não há "path" quando o assunto é web\
-Falta aceitar mais de uma URL de API externa
-Falta auto-refresh quando adiciona novo produto
-Alterar para buscar "on demand" da API, ao invés de salvar em banco
+Não é possível realizar o upload de uma imagem pela web quando s\ubindo um novo produto. Isso porque não há "path" quando o assunto é web\
+Falta aceitar mais de uma URL de API externa\
+Falta auto-refresh quando adiciona novo produto\
+Alterar para buscar "on demand" da API, ao invés de salvar em banco\
 <del>Busca não está scrollable na web</del> [Corrigido em 07-02-23, alterado de visualização lista para grid se for web]\
 Melhorar barra de busca, não parece estar buscando corretamente\
-Quando acessa como admin, tem que atualizar a página para ir para o menu de admin
-Falta colocar tooltip do valor da nota nas estrelas
-Falta melhorar a escolha da oferta do dia (atualmente, pega a maior avalição)
+Quando acessa como admin, tem que atualizar a página para ir para o menu de admin\
+Falta colocar tooltip do valor da nota nas estrelas\
+Falta melhorar a escolha da oferta do dia (atualmente, pega a maior avalição)\
+Adicionar alternativa aos métodos de pagamento
 
 ## Log
 - **28-01-23**:\
@@ -74,4 +78,5 @@ Detalhamento do produto\
 Avaliações (rating)
 - **08-02-23**:\
 Oferta do dia\
-Carrinho
+Carrinho\
+Apple e Google Pay (não implementados)
