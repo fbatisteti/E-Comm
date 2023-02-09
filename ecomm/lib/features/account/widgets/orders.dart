@@ -1,5 +1,9 @@
+import 'package:ecomm/common/widgets/loader.dart';
 import 'package:ecomm/constants/global_variables.dart';
+import 'package:ecomm/features/account/services/account_services.dart';
 import 'package:ecomm/features/account/widgets/single_product.dart';
+import 'package:ecomm/features/order_details/screens/order_details_screen.dart';
+import 'package:ecomm/models/order.dart';
 import 'package:flutter/material.dart';
 
 class Orders extends StatefulWidget {
@@ -10,16 +14,25 @@ class Orders extends StatefulWidget {
 }
 
 class _OrdersState extends State<Orders> {
-  List list = [
-    'https://images.unsplash.com/photo-1675154030133-10218759a22b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8',
-    'https://images.unsplash.com/photo-1675154030133-10218759a22b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8',
-    'https://images.unsplash.com/photo-1675154030133-10218759a22b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8',
-    'https://images.unsplash.com/photo-1675154030133-10218759a22b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8',
-  ];
+  List<Order>? orders;
+  final AccountServices accountServices = AccountServices();
+
+  @override
+  void initState() {
+    super.initState();
+    fetchOrders();
+  }
+
+  void fetchOrders() async {
+    orders = await accountServices.fetchMyOrders(context: context);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context){
-    return Column(
+    return (orders == null)
+    ? const Loader()
+    : Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,9 +64,11 @@ class _OrdersState extends State<Orders> {
           padding: const EdgeInsets.only(left: 10, top: 20, right: 0),
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: list.length,
+            itemCount: orders!.length,
             itemBuilder: (context, index) {
-              return SingleProduct(image: list[index]);
+              return GestureDetector(
+                onTap: () => { Navigator.pushNamed(context, OrderDetailsScreen.routeName, arguments: orders![index]) },
+                child: SingleProduct(image: orders![index].products[0].images[0])); // primeira imagem do primeiro produto
             },
           ),
         ),

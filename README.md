@@ -27,6 +27,7 @@ Não foi feita a parte de pagamentos do iOS
 - cloudinary_public
 - flutter_rating_bar
 - pay
+- intl
 
 **Dependências BACK**:
 - HTTP
@@ -72,9 +73,9 @@ Inclusão de produtos
 Tela de produtos apresentando produtos\
 Remoção de produtos
 - **07-02-23**:\
-Inserção de produtos de API externa *\
+\* Inserção de produtos de API externa\
 Navegação pelos produtos por categoria ("filtro")\
-Criação do filtro "todos" *\
+\* Criação do filtro "todos"\
 Detalhamento do produto\
 Avaliações (rating)
 - **08-02-23**:\
@@ -82,5 +83,6 @@ Oferta do dia\
 Carrinho\
 Apple e Google Pay (não implementados)
 - **09-02-23**:\
-Método "genérico" de venda\
-Pedidos
+\* Método "genérico" de venda\
+Pedidos/venda
+Lista/tela de pedidos realizados
