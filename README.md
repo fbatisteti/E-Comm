@@ -1,4 +1,4 @@
-*This project will be written em Brazilian Portuguese only.*
+*This project documentation will be written em Brazilian Portuguese only.*
 
 # E-Commerce Mock-up
 
@@ -33,7 +33,7 @@ npm run dev
 - JSONWebToken
 
 **Você precisa:**
-- Alterar o arquivo "./ecomm/lib/constants/private_variables_copy.dart" com as suas credenciais (IP, Cloudinary...) e remover o "_copy" do nome\
+- Alterar o arquivo "./ecomm/lib/constants/private_variables_copy.dart" com as suas credenciais (IP, Cloudinary...) e remover o "_copy" do nome
 - Alterar o arquivo "./server/credential_copy.js" com as suas credenciais do MongoDB e remover o "_copy" do nome
 
 ## Erros conhecidos / Falta fazer
@@ -73,4 +73,5 @@ Criação do filtro "todos" *\
 Detalhamento do produto\
 Avaliações (rating)
 - **08-02-23**:\
-Oferta do dia
+Oferta do dia\
+Carrinho

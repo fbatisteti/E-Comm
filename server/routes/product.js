@@ -1,7 +1,8 @@
 const express = require('express');
 const productRouter = express.Router();
 const auth = require('../middlewares/auth');
-const Product = require("../models/product");
+const {Product} = require("../models/product");
+
 
 // api/endpoint?param=value -> req.query.param
 // api/endpoit:param=value -> req.params.param
@@ -74,7 +75,7 @@ productRouter.post('/api/rate-product', auth, async (req, res) => {
 // DEAL OF THE DAY
 productRouter.get('/api/deal-of-day', auth, async (req, res) => {
     try {
-        let products = await Product.find({});
+        let products = await Product.find();
 
         products = products.sort((a, b) => {
             let aSum = 0;
