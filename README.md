@@ -130,3 +130,5 @@ Estatísticas, logout e toques finais (do tutorial)\
 **\*** Refatoração e componentização da AppBar\
 **\*** Senha oculta quando digitada\
 **\*** Buscar produtos de todas as APIs listadas
+- **10-02-23**:\
+**\*** Correção e melhoria na oferta do dia

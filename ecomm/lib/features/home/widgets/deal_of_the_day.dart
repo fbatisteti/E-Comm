@@ -1,4 +1,5 @@
 import 'package:ecomm/common/widgets/loader.dart';
+import 'package:ecomm/features/home/screens/category_deals_screen.dart';
 import 'package:ecomm/features/home/services/home_services.dart';
 import 'package:ecomm/features/product_details/screens/product_details_screen.dart';
 import 'package:ecomm/models/product.dart';
@@ -30,6 +31,10 @@ class _DealOfTheDayState extends State<DealOfTheDay> {
     Navigator.pushNamed(context, ProductDetailsScreen.routeName, arguments: product,);
   }
 
+  void navigateToAllCategoriesPage(BuildContext context) {
+    Navigator.pushNamed(context, CategoryDealsScreen.routeName, arguments: '');
+  }
+
   @override
   Widget build(BuildContext context) {
     return (product == null)
@@ -40,13 +45,30 @@ class _DealOfTheDayState extends State<DealOfTheDay> {
       onTap: navigateToDetailsScreen,
       child: Column(
         children: [
-          Container(
-            alignment: Alignment.topLeft,
-            padding: const EdgeInsets.only(left: 10, top: 15),
-            child: const Text(
-              'Deal of the Day',
-              style: TextStyle(fontSize: 20),),
-          ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: const Text(
+                    'Deal of the Day',
+                    style: TextStyle(fontSize: 20),),
+                ),
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: GestureDetector(
+                    onTap: () => navigateToAllCategoriesPage(context),
+                    child: Text(
+                      'See all deals',
+                      style: TextStyle(color: Colors.cyan[800],),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),          
           Image.network(
             product!.images[0],
             height: 235,
@@ -55,16 +77,25 @@ class _DealOfTheDayState extends State<DealOfTheDay> {
           Container(
             alignment: Alignment.topLeft,
             padding: const EdgeInsets.only(left: 15,),
-            child: const Text(
-              '\$100',
-              style: TextStyle(fontSize: 18,),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  product!.name,
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  '\$${product!.price.toString()}',
+                  style: const TextStyle(fontSize: 18,),
+                ),
+              ],
             ),
           ),
           Container(
             alignment: Alignment.topLeft,
             padding: const EdgeInsets.only(left: 15, top: 5, right: 40),
             child: const Text(
-              'Image',
+              'More images',
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
@@ -82,14 +113,6 @@ class _DealOfTheDayState extends State<DealOfTheDay> {
               ).toList(),
             ),
           ),
-          Container(
-            padding: const EdgeInsets.only(left: 15, top: 15, bottom: 15),
-            alignment: Alignment.topLeft,
-            child: Text(
-              'See all deals',
-              style: TextStyle(color: Colors.cyan[800],),
-            ),
-          )
         ],
       ),
     );
