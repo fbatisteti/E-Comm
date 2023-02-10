@@ -22,7 +22,8 @@ class ProductDetailsServices {
       http.Response res = await http.post(
         Uri.parse('$uri/api/rate-product'),
         headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8', // porque está usando express
+          'Content-Type':
+              'application/json; charset=UTF-8', // porque está usando express
           'x-auth-token': userProvider.user.token,
         },
         body: jsonEncode({
@@ -32,13 +33,11 @@ class ProductDetailsServices {
       );
 
       httpErrorHandle(
-        response: res,
-        context: context,
-        onSucces: () {
-          showSnackBar(context, 'Product rated');
-          Navigator.pop(context);
-        });
-      
+          response: res,
+          context: context,
+          onSucces: () {
+            showSnackBar(context, 'Product rated');
+          });
     } catch (e) {
       showSnackBar(context, e.toString());
     }
@@ -54,7 +53,8 @@ class ProductDetailsServices {
       http.Response res = await http.post(
         Uri.parse('$uri/api/add-to-cart'),
         headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8', // porque está usando express
+          'Content-Type':
+              'application/json; charset=UTF-8', // porque está usando express
           'x-auth-token': userProvider.user.token,
         },
         body: jsonEncode({
@@ -63,13 +63,13 @@ class ProductDetailsServices {
       );
 
       httpErrorHandle(
-        response: res,
-        context: context,
-        onSucces: () {
-          User user = userProvider.user.copyWith(cart: jsonDecode(res.body)['cart']);
-          userProvider.setUserFromModel(user);
-        });
-      
+          response: res,
+          context: context,
+          onSucces: () {
+            User user =
+                userProvider.user.copyWith(cart: jsonDecode(res.body)['cart']);
+            userProvider.setUserFromModel(user);
+          });
     } catch (e) {
       showSnackBar(context, e.toString());
     }

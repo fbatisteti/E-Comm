@@ -4,6 +4,7 @@ import 'package:ecomm/common/widgets/custom_button.dart';
 import 'package:ecomm/common/widgets/search_bar.dart';
 import 'package:ecomm/common/widgets/stars.dart';
 import 'package:ecomm/constants/global_variables.dart';
+import 'package:ecomm/constants/utils.dart';
 import 'package:ecomm/features/product_details/services/product_details_services.dart';
 import 'package:ecomm/features/search/screens/search_screen.dart';
 import 'package:ecomm/models/product.dart';
@@ -14,30 +15,32 @@ import 'package:provider/provider.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   static const String routeName = '/product-details';
-  final Product product; 
-  const ProductDetailsScreen({
-    Key? key,
-    required this.product
-  }) : super(key: key);
+  final Product product;
+  const ProductDetailsScreen({Key? key, required this.product})
+      : super(key: key);
 
   @override
   _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  final ProductDetailsServices productDetailsServices = ProductDetailsServices();
+  final ProductDetailsServices productDetailsServices =
+      ProductDetailsServices();
   double avgRating = 0;
   double myRating = 0;
-  
+
   @override
   void initState() {
     super.initState();
 
-    double  totalRating = 0;
-    for (int i = 0; i < widget.product.rating!.length; i ++) {
-      totalRating += widget.product.rating![i].rating; // recebe todas as avaliações e soma
+    double totalRating = 0;
+    for (int i = 0; i < widget.product.rating!.length; i++) {
+      totalRating +=
+          widget.product.rating![i].rating; // recebe todas as avaliações e soma
 
-      if (widget.product.rating![i].userId == Provider.of<UserProvider>(context, listen: false).user.id) { // e se for a avaliação do usuário, separa
+      if (widget.product.rating![i].userId ==
+          Provider.of<UserProvider>(context, listen: false).user.id) {
+        // e se for a avaliação do usuário, separa
         myRating = widget.product.rating![i].rating;
       }
     }
@@ -53,12 +56,33 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   void addToCart() {
     productDetailsServices.addToCart(context: context, product: widget.product);
+
+    showSnackBar(context, "Added 1x ${widget.product.name} to cart");
+    showSnackBar(
+        context, "Keep buying! You can change quantity during checkout");
+
+    Navigator.pop(context);
+  }
+
+  void cantAddToCart() {
+    showSnackBar(context, "Out of stock...");
+  }
+
+  void showRating() {
+    String showRate = "Rated ${avgRating.toStringAsFixed(2)} out of 5";
+
+    if (myRating > 0)
+      showRate = "$showRate (you rated ${myRating.toStringAsFixed(2)})";
+
+    showSnackBar(context, showRate);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(child: SearchBar(),),
+      appBar: const CustomAppBar(
+        child: SearchBar(),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +93,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(widget.product.id!),
-                  Stars(rating: avgRating),
+                  GestureDetector(
+                    onTap: showRating,
+                    child: Stars(rating: avgRating),
+                  ),
                 ],
               ),
             ),
@@ -81,16 +108,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
             ),
             CarouselSlider(
-              items: widget.product.images.map(
-                  (i) {
-                  return Builder(
-                    builder: (BuildContext context) => Image.network(
-                      i,
-                      fit: BoxFit.contain,
-                      height: 200,
-                    ),
-                  );
-                }).toList(),
+              items: widget.product.images.map((i) {
+                return Builder(
+                  builder: (BuildContext context) => Image.network(
+                    i,
+                    fit: BoxFit.contain,
+                    height: 200,
+                  ),
+                );
+              }).toList(),
               options: CarouselOptions(
                 viewportFraction: 1,
                 height: 300,
@@ -131,23 +157,44 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               color: Colors.black12,
               height: 5,
             ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: CustomButton(
-                text: "BUY NOW",
-                onTap: () {}
-              ),
+            (widget.product.quantity > 0)
+                ? Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: CustomButton(
+                        text: "BUY NOW",
+                        onTap: () {
+                          showSnackBar(
+                              context, "Instant purchase not implemented");
+                        }),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: CustomButton(
+                        text: "BUY NOW",
+                        color: Colors.grey,
+                        onTap: cantAddToCart),
+                  ),
+            const SizedBox(
+              height: 10,
             ),
-            const SizedBox(height: 10,),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: CustomButton(
-                text: "ADD TO CART",
-                color: const Color.fromRGBO(254, 216, 19, 1),
-                onTap: addToCart
-              ),
+            (widget.product.quantity > 0)
+                ? Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: CustomButton(
+                        text: "ADD TO CART",
+                        color: const Color.fromRGBO(254, 216, 19, 1),
+                        onTap: addToCart),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: CustomButton(
+                        text: "OUT OF STOCK",
+                        color: Colors.grey,
+                        onTap: cantAddToCart),
+                  ),
+            const SizedBox(
+              height: 10,
             ),
-            const SizedBox(height: 10,),
             Container(
               color: Colors.black12,
               height: 5,
@@ -165,7 +212,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               direction: Axis.horizontal,
               itemCount: 5,
               itemPadding: const EdgeInsets.symmetric(horizontal: 4),
-              itemBuilder: (context, _) => const Icon(Icons.star, color: GlobalVariables.secondaryColor,),
+              itemBuilder: (context, _) => const Icon(
+                Icons.star,
+                color: GlobalVariables.secondaryColor,
+              ),
               onRatingUpdate: (rating) {
                 productDetailsServices.rateProduct(
                   context: context,
