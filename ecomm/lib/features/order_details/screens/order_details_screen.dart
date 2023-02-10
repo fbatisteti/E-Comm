@@ -137,7 +137,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          // ignore: prefer_const_literals_to_create_immutables
                           children: [
                             const Text("Order date:", style: TextStyle(fontWeight: FontWeight.w600),),
                             const Text("Order ID:", style: TextStyle(fontWeight: FontWeight.w600),),

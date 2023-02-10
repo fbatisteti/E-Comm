@@ -39,7 +39,6 @@ class AuthService {
         },
       );
 
-      // ignore: use_build_context_synchronously
       httpErrorHandle(
         response: res,
         context: context,
@@ -73,16 +72,13 @@ class AuthService {
         },
       );
 
-      // ignore: use_build_context_synchronously
       httpErrorHandle(
         response: res,
         context: context,
         onSucces: () async {
           SharedPreferences prefs = await SharedPreferences.getInstance();
-          // ignore: use_build_context_synchronously
           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
           await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
-          // ignore: use_build_context_synchronously
           Navigator.pushNamedAndRemoveUntil(
             context,
             BottomBar.routeName,

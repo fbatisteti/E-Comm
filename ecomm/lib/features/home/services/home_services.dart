@@ -24,7 +24,6 @@ class HomeServices {
         },
       );
 
-      // ignore: use_build_context_synchronously
       httpErrorHandle(
         response: res,
         context: context,
@@ -60,7 +59,6 @@ class HomeServices {
         },
       );
 
-      // ignore: use_build_context_synchronously
       httpErrorHandle(
         response: res,
         context: context,
@@ -95,7 +93,6 @@ class HomeServices {
         },
       );
 
-      // ignore: use_build_context_synchronously
       httpErrorHandle(
         response: res,
         context: context,

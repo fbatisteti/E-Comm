@@ -92,9 +92,7 @@ class _BottomBarState extends State<BottomBar> {
                   ),
                 ),
               ),
-              // ignore: prefer_const_constructors
               child: badges.Badge(
-                // ignore: prefer_const_constructors
                 badgeStyle: badges.BadgeStyle(
                   elevation: 0,
                   badgeColor: Colors.white,
