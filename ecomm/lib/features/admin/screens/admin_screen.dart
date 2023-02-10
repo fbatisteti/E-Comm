@@ -1,4 +1,5 @@
 import 'package:ecomm/constants/global_variables.dart';
+import 'package:ecomm/features/admin/screens/analytics_screen.dart';
 import 'package:ecomm/features/admin/screens/orders_screen.dart';
 import 'package:ecomm/features/admin/screens/products_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class _AdminScreenState extends State<AdminScreen> {
 
   List<Widget> pages = [
     const ProductsScreen(),
-    const Center(child: Text('Analytics Page'),),
+    const AnalyticsScreen(),
     const OrdersScreen(),
   ];
 

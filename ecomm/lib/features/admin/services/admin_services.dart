@@ -5,6 +5,7 @@ import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:ecomm/constants/error_handling.dart';
 import 'package:ecomm/constants/global_variables.dart';
 import 'package:ecomm/constants/utils.dart';
+import 'package:ecomm/features/admin/models/sales.dart';
 import 'package:ecomm/models/order.dart';
 import 'package:ecomm/models/product.dart';
 import 'package:ecomm/providers/user_provider.dart';
@@ -222,5 +223,45 @@ class AdminServices {
     } catch (e) {
       showSnackBar(context, e.toString());
     }
+  }
+
+  Future<Map<String, dynamic>> getEarnings(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    List<Sales> sales = [];
+    double totalEarnings = 0;
+
+    try {
+      http.Response res = await http.get(
+        Uri.parse('$uri/admin/analytics'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8', // porque está usando express
+          'x-auth-token': userProvider.user.token,
+        },
+      );
+
+      // ignore: use_build_context_synchronously
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSucces: () {
+          var response = jsonDecode(res.body);
+          totalEarnings = response['totalEarnings'];
+          sales = [
+            Sales('Mobiles', response['mobileEarnings']),
+            Sales('Essentials', response['essentialsEarnings']),
+            Sales('Appliances', response['appliancesEarnings']),
+            Sales('Books', response['booksEarnings']),
+            Sales('Fashion', response['fashionEarnings']),
+          ];
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+
+    return {
+      'sales': sales,
+      'totalEarnings': totalEarnings,
+    };
   }
 }

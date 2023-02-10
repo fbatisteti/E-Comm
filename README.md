@@ -88,4 +88,4 @@ Apple e Google Pay (não implementados)
 Pedidos/venda\
 Lista/tela de pedidos realizados\
 Visualização de pedidos pelo admin\
-Estatísticas
+Estatísticas, logout e toques finais (do tutorial)
