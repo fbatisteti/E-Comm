@@ -127,4 +127,5 @@ Lista/tela de pedidos realizados\
 Visualização de pedidos pelo admin\
 Estatísticas, logout e toques finais (do tutorial)\
 **\*** Entrada automática após criação de conta\
-**\*** Refatoração e componentização da AppBar
+**\*** Refatoração e componentização da AppBar\
+**\*** Senha oculta quando digitada
