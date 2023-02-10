@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:ecomm/common/widgets/custom_app_bar.dart';
 import 'package:ecomm/common/widgets/custom_button.dart';
 import 'package:ecomm/common/widgets/custom_textfield.dart';
 import 'package:ecomm/constants/global_variables.dart';
@@ -75,15 +76,8 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50),
-        child: AppBar(
-          flexibleSpace: Container( // gambiarra para colocar um gradiente
-            decoration: const BoxDecoration(
-              gradient: GlobalVariables.appBarGradient
-            ),
-          ),
-          title: Row(
+      appBar: CustomAppBar(
+        child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text('Add Product', style: TextStyle(color: Colors.black),),
@@ -94,7 +88,6 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
               ),
             ],
           ),
-        ),
       ),
 
       body: SingleChildScrollView(

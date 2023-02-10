@@ -1,3 +1,4 @@
+import 'package:ecomm/common/widgets/custom_app_bar.dart';
 import 'package:ecomm/common/widgets/loader.dart';
 import 'package:ecomm/constants/global_variables.dart';
 import 'package:ecomm/features/home/services/home_services.dart';
@@ -38,18 +39,10 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50),
-        child: AppBar(
-          flexibleSpace: Container( // gambiarra para colocar um gradiente
-            decoration: const BoxDecoration(
-              gradient: GlobalVariables.appBarGradient
-            ),
-          ),
-          title: Text(
+      appBar: CustomAppBar(
+        child: Text(
             widget.category,
             style: const TextStyle(color: Colors.black),),
-        ),
       ),
 
       body: (productList == null)

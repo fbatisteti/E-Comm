@@ -1,3 +1,5 @@
+import 'package:ecomm/common/widgets/custom_app_bar.dart';
+import 'package:ecomm/common/widgets/generic_bar.dart';
 import 'package:ecomm/constants/global_variables.dart';
 import 'package:ecomm/features/admin/screens/analytics_screen.dart';
 import 'package:ecomm/features/admin/screens/orders_screen.dart';
@@ -31,32 +33,7 @@ class _AdminScreenState extends State<AdminScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50),
-        child: AppBar(
-          flexibleSpace: Container( // gambiarra para colocar um gradiente
-            decoration: const BoxDecoration(
-              gradient: GlobalVariables.appBarGradient
-            ),
-          ),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                alignment: Alignment.topLeft,
-                child: Image.asset(
-                  'images/logo.png',
-                  width: 120,
-                  height: 45,
-                  color: Colors.black,
-                ),
-              ),
-              const Text("Admin", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),),
-            ],
-          ),
-        ),
-      ),
-      
+      appBar: CustomAppBar(child: GenericBar(isAdmin: true),),
       body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _page,

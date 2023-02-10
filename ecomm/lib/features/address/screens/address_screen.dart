@@ -1,3 +1,4 @@
+import 'package:ecomm/common/widgets/custom_app_bar.dart';
 import 'package:ecomm/common/widgets/custom_button.dart';
 import 'package:ecomm/common/widgets/custom_textfield.dart';
 import 'package:ecomm/constants/global_variables.dart';
@@ -90,15 +91,8 @@ class _AddressScreenState extends State<AddressScreen> {
     var address = context.watch<UserProvider>().user.address;
 
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60),
-        child: AppBar(
-          flexibleSpace: Container( // gambiarra para colocar um gradiente
-            decoration: const BoxDecoration(
-              gradient: GlobalVariables.appBarGradient
-            ),
-          ),
-        ),
+      appBar: const CustomAppBar(
+        child: Text('Checkout', style: TextStyle(fontSize: 22, color: Colors.black,),)
       ),
       body: SingleChildScrollView(
         child: Padding(
