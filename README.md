@@ -132,4 +132,5 @@ Estatísticas, logout e toques finais (do tutorial)\
 **\*** Buscar produtos de todas as APIs listadas
 - **10-02-23**:\
 **\*** Correção e melhoria na oferta do dia\
-**\*** Automação do carrossel da página home
+**\*** Automação do carrossel da página home\
+**\*** Primeiro usuário criado é admin
