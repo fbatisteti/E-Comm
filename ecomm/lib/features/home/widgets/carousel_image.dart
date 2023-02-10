@@ -19,12 +19,12 @@ class _CarouselImageState extends State<CarouselImage> {
   void nextSlide() { _carouselController.nextPage(); }
 
   void stopTimer() { timer?.cancel(); }
-  void startTimer() {timer = Timer.periodic(const Duration(seconds: 1), (Timer t) => nextSlide());}
+  void startTimer() {timer = Timer.periodic(const Duration(seconds: 10), (Timer t) => nextSlide());}
 
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(const Duration(seconds: 1), (Timer t) => nextSlide());
+    timer = Timer.periodic(const Duration(seconds: 10), (Timer t) => nextSlide());
   }
 
   @override

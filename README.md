@@ -87,7 +87,7 @@ Não foi feita a parte de pagamentos para iOS e Android. Ao invés disso, criou-
 - Melhorar barra de busca, não parece estar buscando corretamente
 - Quando acessa como admin, tem que atualizar a página para ir para o menu de admin
 - Falta colocar tooltip do valor da nota nas estrelas
-- Falta melhorar a escolha da oferta do dia (atualmente, pega a maior avalição)
+- <del>Falta melhorar a escolha da oferta do dia (atualmente, pega a maior avalição)</del> [Corrigido em 10-02-23, mudança na apresentação, ainda pega o produto que tem mais avaliações em geral]
 - <del>Adicionar alternativa aos métodos de pagamento<de.> [Corrigido em 09-02-23, adicionado um método genérico]
 - Avisar quando um produto é adicionado ao carrinho
 
