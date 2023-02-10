@@ -8,7 +8,7 @@ const credentials = require("../credentials");
 // ADD PRODUCT
 adminRouter.post('/admin/add-product', admin, async (req, res) => {
     try {
-        const {name, description, images, quantity, price, category, origin} = req.body;
+        const {name, description, images, quantity, price, category} = req.body;
         let product = new Product({
             name,
             description,
@@ -16,7 +16,7 @@ adminRouter.post('/admin/add-product', admin, async (req, res) => {
             quantity,
             price,
             category,
-            origin,
+            origin: 'ecomm',
         });
         product = await product.save();
         res.json(product);
@@ -171,10 +171,10 @@ adminRouter.get('/admin/external-api', admin, async (req, res) => {
                     Math.floor(Math.random() * 101), // random de 0 a 100
                 price: // preco - price / _ - if hasDiscount, price * (1 - discountValue)
                     (allProducts[i][0] == 'pt-br')
-                    ? parseFloat(product['preco'])
+                    ? parseFloat(product['preco']).toFixed(2)
                     : (product['hasDiscount'])
-                        ? parseFloat(product['price'] * (1 - product['discountValue']))
-                        : parseFloat(product['price']),
+                        ? (parseFloat(product['price'] * (1 - product['discountValue']))).toFixed(2)
+                        : parseFloat(product['price']).toFixed(2),
                 category: // departamento - _ / _ - aleatório
                     (allProducts[i][0] == 'pt-br')
                     ? getCategoria(product['departamento'])

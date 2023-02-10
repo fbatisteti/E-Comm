@@ -9,5 +9,4 @@ const credentials = {
     }
 };
 
-module.exports = credentials.db;
-module.exports = hashKey;
+module.exports = credentials;
