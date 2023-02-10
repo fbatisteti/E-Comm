@@ -80,15 +80,15 @@ Não foi feita a parte de pagamentos para iOS e Android. Ao invés disso, criou-
 
 ## Erros conhecidos / Falta fazer
 - Não é possível realizar o upload de uma imagem pela web quando s\ubindo um novo produto. Isso porque não há "path" quando o assunto é web
-- Falta aceitar mais de uma URL de API externa
+- <del>Falta aceitar mais de uma URL de API externa</del> [Adicionado em 10-02-23, olhar o arquivo *./server/routes/admin.js* para mais detalhes]
 - Falta auto-refresh quando adiciona novo produto
-- Alterar para buscar "on demand" da API, ao invés de salvar em banco
+- <del>Alterar para buscar "on demand" da API, ao invés de salvar em banco</del> [Abandonado em 10-02-23, tem que salvar em banco para ter registro dos IDs]
 - <del>Busca não está scrollable na web</del> [Corrigido em 07-02-23, alterado de visualização lista para grid se for web]
 - Melhorar barra de busca, não parece estar buscando corretamente
 - Quando acessa como admin, tem que atualizar a página para ir para o menu de admin
 - Falta colocar tooltip do valor da nota nas estrelas
 - Falta melhorar a escolha da oferta do dia (atualmente, pega a maior avalição)
-- Adicionar alternativa aos métodos de pagamento
+- <del>Adicionar alternativa aos métodos de pagamento<de.> [Corrigido em 09-02-23, adicionado um método genérico]
 - Avisar quando um produto é adicionado ao carrinho
 
 ## Log
@@ -128,4 +128,5 @@ Visualização de pedidos pelo admin\
 Estatísticas, logout e toques finais (do tutorial)\
 **\*** Entrada automática após criação de conta\
 **\*** Refatoração e componentização da AppBar\
-**\*** Senha oculta quando digitada
+**\*** Senha oculta quando digitada\
+**\*** Buscar produtos de todas as APIs listadas

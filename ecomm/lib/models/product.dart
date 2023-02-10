@@ -11,6 +11,7 @@ class Product {
   final double price;
   final String? id;
   final List<Rating>? rating;
+  final String? origin;
 
   Product({
     required this.name,
@@ -21,6 +22,7 @@ class Product {
     required this.price,
     this.id,
     this.rating,
+    this.origin,
   });
 
   Map<String, dynamic> toMap() {
@@ -33,6 +35,7 @@ class Product {
       'price': price,
       'id': id,
       'rating': rating,
+      'origin': origin,
     };
   }
 
@@ -47,7 +50,8 @@ class Product {
       id: map['_id'], // underline porque é como vem na resposta
       rating: (map['ratings'] != null) // ratingS porque está assim no rating.js
         ? List<Rating>.from(map['ratings']?.map((x) => Rating.fromMap(x)),)
-        : null 
+        : null ,
+      origin: map['origin'] ?? '',
     );
   }
 

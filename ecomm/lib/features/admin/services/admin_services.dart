@@ -16,7 +16,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 class AdminServices {
-  void PopulateFromApi({required BuildContext context,}) async {
+  void populateFromApi({required BuildContext context,}) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     try {
@@ -48,7 +48,8 @@ class AdminServices {
     required double price,
     required double quantity,
     required String category,
-    required List<File> images
+    required List<File> images,
+    String? origin,
   }) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
@@ -72,7 +73,8 @@ class AdminServices {
         quantity: quantity,
         images: imageUrls,
         category: category,
-        price: price
+        price: price,
+        origin: origin,
       );
 
       http.Response res = await http.post(

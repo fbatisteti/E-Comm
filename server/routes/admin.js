@@ -8,7 +8,7 @@ const credentials = require("../credentials");
 // ADD PRODUCT
 adminRouter.post('/admin/add-product', admin, async (req, res) => {
     try {
-        const {name, description, images, quantity, price, category} = req.body;
+        const {name, description, images, quantity, price, category, origin} = req.body;
         let product = new Product({
             name,
             description,
@@ -16,6 +16,7 @@ adminRouter.post('/admin/add-product', admin, async (req, res) => {
             quantity,
             price,
             category,
+            origin,
         });
         product = await product.save();
         res.json(product);
@@ -94,16 +95,45 @@ function getCategoria(depto) {
       }
 }
 
+function getRandomCategoria() {
+    let i = Math.floor(Math.random() * 6);
+
+    switch (i) {
+        case 0:
+            return 'Appliances';
+        case 1:
+            return 'Books';
+        case 2:
+            return 'Essentials';
+        case 3:
+            return 'Fashion';
+        case 4:
+            return 'Mobile';
+        default:
+            return 'Tools';
+    }
+}
+
 adminRouter.get('/admin/external-api', admin, async (req, res) => {
-    var products;
+    let allProducts = [];
     try {
-        products = await fetch(
-            credentials.externalApi.br,
-            {
-                method: 'GET',
-                headers: {'Accept': 'application/json',},
-            })
-            .then((response) => response.json());
+        let apis = Object.keys(credentials.externalApi);
+        var products;
+
+        for (let i = 0; i < apis.length; i++) {
+            products = await fetch(
+                credentials.externalApi[apis[i]],
+                {
+                    method: 'GET',
+                    headers: {'Accept': 'application/json',},
+                })
+                .then((response) => response.json());
+
+            allProducts.push([
+                apis[i], // chave
+                products, // produtos
+            ]);
+        }
     } catch (e) {
         return res
             .status(500) // Internal Server Error
@@ -114,20 +144,46 @@ adminRouter.get('/admin/external-api', admin, async (req, res) => {
 
     var convertedProducts = [];
 
-    products.forEach(product => {
-        convertedProducts.push(new Product({
-            name: product['nome'],
-            description: (product['descricao'] + ' / Material: ' + product['material'] + ' / Status: ' + product['categoria']),
-            images: product['imagem'],
-            quantity: Math.floor(Math.random() * 101), // random de 0 a 100
-            price: parseFloat(product['preco']),
-            category: getCategoria(product['departamento']), // conversões devidas
-            ratings: [{
-                userId: 'x',
-                rating: (Math.floor(Math.random() * 49) + 1)/10,
-            }], // random de 1 a 5
-        }));
-    });
+    /***
+     * Este mapeamento vai depender das suas APIs externas.
+     * Como eu já sei como elas vêm, estou ajustando para o padrão delas.
+     * 
+     * Não vou arriscar mapear "na esperança", pois as chaves dos objetos podem vir
+     * de maneiras diferentes dentro dos próprios objetos, o que deixaria qualquer
+     * sequenciamneto numérico quase impossível de ser feito.
+     */
+    for (let i = 0; i < allProducts.length; i ++) {
+        allProducts[i][1].forEach(product => {
+            convertedProducts.push(new Product({
+                name: // nome - name
+                    (allProducts[i][0] == 'pt-br')
+                    ? product['nome']
+                    : product['name'],
+                description: // descrição - description / material - details.material / status - details.adjective
+                    (allProducts[i][0] == 'pt-br')
+                    ? (product['descricao'] + ' / Material: ' + product['material'] + ' / Status: ' + product['categoria'])
+                    : (product['description'] + ' / Material: ' + product['details']['material'] + ' / Status: ' + product['details']['adjective']),
+                images: // imagem - gallery
+                    (allProducts[i][0] == 'pt-br') 
+                    ? product['imagem']  
+                    : product['gallery'],
+                quantity:
+                    Math.floor(Math.random() * 101), // random de 0 a 100
+                price: // preco - price / _ - if hasDiscount, price * (1 - discountValue)
+                    (allProducts[i][0] == 'pt-br')
+                    ? parseFloat(product['preco'])
+                    : (product['hasDiscount'])
+                        ? parseFloat(product['price'] * (1 - product['discountValue']))
+                        : parseFloat(product['price']),
+                category: // departamento - _ / _ - aleatório
+                    (allProducts[i][0] == 'pt-br')
+                    ? getCategoria(product['departamento'])
+                    : getRandomCategoria(),
+                ratings: [{ userId: 'x', rating: (Math.floor(Math.random() * 49) + 1)/10, }], // random de 1 a 5
+                origin: allProducts[i][0],
+            }));
+        });
+    }
 
     convertedProducts.forEach(async product => {
         product = await product.save();

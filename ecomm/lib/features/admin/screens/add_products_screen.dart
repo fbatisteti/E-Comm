@@ -49,12 +49,12 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
         price: double.parse(productPriceController.text),
         quantity: double.parse(productQuantityController.text),
         category: category,
-        images: images);
+        images: images,);
     }
   }
 
   void populateFromApi() {
-    adminServices.PopulateFromApi(context: context);
+    adminServices.populateFromApi(context: context);
   }
 
   void selectImages() async {
