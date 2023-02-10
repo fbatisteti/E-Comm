@@ -131,4 +131,5 @@ Estatísticas, logout e toques finais (do tutorial)\
 **\*** Senha oculta quando digitada\
 **\*** Buscar produtos de todas as APIs listadas
 - **10-02-23**:\
-**\*** Correção e melhoria na oferta do dia
+**\*** Correção e melhoria na oferta do dia\
+**\*** Automação do carrossel da página home
