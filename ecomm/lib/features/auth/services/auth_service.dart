@@ -42,11 +42,12 @@ class AuthService {
       httpErrorHandle(
         response: res,
         context: context,
-        onSucces: () => {
+        onSucces: () async {
           showSnackBar(
             context,
-            'Account created. Login with the same credentials',
-          ),
+            'Account created. Welcome to E-Comm!',
+          );
+          signInUser(context: context, email: email, password: password);
         },
       );
     } catch (e) {
