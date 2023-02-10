@@ -31,10 +31,15 @@ authRouter.post('/api/signup', async (req, res) => {
 
         const hashedPassword = await bcryptjs.hash(password, 8); // aqui NÃO é a chave da encriptação
 
+        let type = 'user';
+        let users = await User.find({});
+        if (users.toString() == "") type = 'admin'; // primeiro usuário
+
         let user = new User({
             email,
             password: hashedPassword,
-            name
+            name,
+            type,
         });
     
         user = await user.save();
